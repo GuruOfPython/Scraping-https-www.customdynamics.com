@@ -45,7 +45,9 @@ class MainScraper(scrapy.Spider):
                     "parent_id": "9808",
                     "use_saved_values": "0",
                     "parent_dropdown_id": "3"
-                }
+                },
+                "prefix": "harley-davidson",
+                "suffix": "cat=8"
             },
             "Indian": {
                 "first post url": "https://www.customdynamics.com/amfinder/index/options/",
@@ -54,9 +56,13 @@ class MainScraper(scrapy.Spider):
                     "parent_id": "10661",
                     "use_saved_values": "0",
                     "parent_dropdown_id": "3"
-                }
+                },
+                "prefix": "indian",
+                "suffix": "cat=503"
             },
         }
         self.total_result = []
         self.total_urls = []
         self.total_cnt = 0
+
+    
