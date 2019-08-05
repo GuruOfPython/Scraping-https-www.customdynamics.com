@@ -65,4 +65,30 @@ class MainScraper(scrapy.Spider):
         self.total_urls = []
         self.total_cnt = 0
 
-    
+    def start_requests(self):
+        for type, body in self.start_urls.items():
+            pass
+
+    def create_result_file(self, result_file_name):
+        heading = [
+            "Name", "Description", "Images", "Price"
+        ]
+        import codecs
+        self.result_file = codecs.open(result_file_name, "w", "utf-8")
+        self.result_file.write(u'\ufeff')
+        self.insert_row(result_row=heading)
+
+    def insert_row(self, result_row):
+        result_row = [str(elm) if elm else "" for elm in result_row]
+        result_row = [elm.replace('"', '""') for elm in result_row]
+        self.result_file.write('"' + '","'.join(result_row) + '"' + "\n")
+        self.result_file.flush()
+
+if __name__ == '__main__':
+    from scrapy.utils.project import get_project_settings
+    from scrapy.crawler import CrawlerProcess, CrawlerRunner
+
+    settings = get_project_settings()
+    process = CrawlerProcess(settings)
+    process.crawl(MainScraper)
+    process.start()
